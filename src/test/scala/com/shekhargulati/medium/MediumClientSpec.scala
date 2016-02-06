@@ -27,12 +27,6 @@ class MediumClientSpec extends FunSpec with Matchers with BeforeAndAfterEach {
         val authorizationUrl = medium.getAuthorizationUrl("test_state", "https://example.com/me/callback", Array("basicProfile", "listPublications", "publishPost"))
         authorizationUrl should be("https://api.medium.com/m/oauth/authorize?client_id=test_client_id&scope=basicProfile,listPublications,publishPost&state=test_state&response_type=code&redirect_uri=https://example.com/me/callback")
       }
-
-      it("should generate valid authorization URL 1") {
-        val medium = MediumClient("test_client_id", "test_client_secret")
-        val authorizationUrl = medium.getAuthorizationUrl("test_state", "http://www.shekhargulati.com/", Array("basicProfile", "listPublications", "publishPost"))
-        println(s"please open the link in your browser $authorizationUrl")
-      }
     }
 
     describe("when exchange access token for code is successful") {

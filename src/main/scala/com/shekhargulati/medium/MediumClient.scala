@@ -2,12 +2,11 @@ package com.shekhargulati.medium
 
 import com.shekhargulati.medium.MediumProtocol._
 import com.shekhargulati.medium.apiDomainObjects._
-import com.typesafe.scalalogging.LazyLogging
 import okhttp3.FormBody.Builder
 import okhttp3._
 import spray.json._
 
-class MediumClient(clientId: String, clientSecret: String, var accessToken: Option[String] = None) extends LazyLogging {
+class MediumClient(clientId: String, clientSecret: String, var accessToken: Option[String] = None) {
 
   val client = new OkHttpClient()
 
@@ -109,7 +108,7 @@ class MediumClient(clientId: String, clientSecret: String, var accessToken: Opti
         .header("Accept-Charset", "utf-8")
         .header("Authorization", s"Bearer $at")
         .url(httpUrl)
-        .post(RequestBody.create(MediaType.parse("application/json"),postRequest.toJson.prettyPrint))
+        .post(RequestBody.create(MediaType.parse("application/json"), postRequest.toJson.prettyPrint))
         .build()
       makeRequest(request, data => data.convertTo[Post])
     case _ => mediumError("Please set access token")
@@ -124,7 +123,7 @@ class MediumClient(clientId: String, clientSecret: String, var accessToken: Opti
         .header("Accept-Charset", "utf-8")
         .header("Authorization", s"Bearer $at")
         .url(httpUrl)
-        .post(RequestBody.create(MediaType.parse("application/json"),postRequest.toJson.prettyPrint))
+        .post(RequestBody.create(MediaType.parse("application/json"), postRequest.toJson.prettyPrint))
         .build()
       makeRequest(request, data => data.convertTo[Post])
     case _ => mediumError("Please set access token")
@@ -145,7 +144,6 @@ class MediumClient(clientId: String, clientSecret: String, var accessToken: Opti
   private def makeRequest[T](request: Request, f: (JsValue) => T)(implicit p: JsonReader[T]): T = {
     val response = client.newCall(request).execute()
     val responseJson: String = response.body().string()
-    logger.info(s"Received response with code ${response.code} >> $responseJson")
     response match {
       case r if r.isSuccessful =>
         val jsValue: JsValue = responseJson.parseJson
