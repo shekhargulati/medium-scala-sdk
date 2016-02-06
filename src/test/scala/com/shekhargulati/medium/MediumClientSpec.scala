@@ -1,6 +1,6 @@
 package com.shekhargulati.medium
 
-import com.shekhargulati.medium.apiDomainObjects.PostRequest
+import com.shekhargulati.medium.domainObjects.PostRequest
 import okhttp3.mockwebserver.{MockResponse, MockWebServer}
 import org.scalatest.{BeforeAndAfterEach, FunSpec, Matchers}
 

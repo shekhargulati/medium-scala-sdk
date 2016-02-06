@@ -1,7 +1,7 @@
 package com.shekhargulati.medium
 
-import com.shekhargulati.medium.MediumProtocol._
-import com.shekhargulati.medium.apiDomainObjects.AccessToken
+import com.shekhargulati.medium.MediumApiProtocol._
+import com.shekhargulati.medium.domainObjects.AccessToken
 import org.scalatest.{FunSpec, Matchers}
 import spray.json._
 

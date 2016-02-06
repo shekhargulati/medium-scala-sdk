@@ -1,6 +1,6 @@
 package com.shekhargulati.medium
 
-object apiDomainObjects {
+object domainObjects {
 
   case class AccessToken(tokenType: String, accessToken: String, refreshToken: String, scope: Array[String], expiresAt: Long)
 

@@ -1,9 +1,9 @@
 package com.shekhargulati.medium
 
-import com.shekhargulati.medium.apiDomainObjects._
+import com.shekhargulati.medium.domainObjects._
 import spray.json._
 
-object MediumProtocol extends DefaultJsonProtocol {
+object MediumApiProtocol extends DefaultJsonProtocol {
 
   implicit val accessTokenFormat = jsonFormat(AccessToken, "token_type", "access_token", "refresh_token", "scope", "expires_at")
 

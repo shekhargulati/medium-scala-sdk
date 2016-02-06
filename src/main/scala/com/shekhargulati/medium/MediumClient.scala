@@ -1,7 +1,7 @@
 package com.shekhargulati.medium
 
-import com.shekhargulati.medium.MediumProtocol._
-import com.shekhargulati.medium.apiDomainObjects._
+import com.shekhargulati.medium.MediumApiProtocol._
+import com.shekhargulati.medium.domainObjects._
 import okhttp3.FormBody.Builder
 import okhttp3._
 import spray.json._
@@ -114,6 +114,15 @@ class MediumClient(clientId: String, clientSecret: String, var accessToken: Opti
     case _ => mediumError("Please set access token")
   }
 
+  /**
+    * Creates a post on Medium and places it under specified publication.
+    * Please refer to the API documentation for rules around publishing in
+    * a publication: https://github.com/Medium/medium-api-docs
+    *
+    * @param publicationId
+    * @param postRequest
+    * @return
+    */
   def createPostInPublication(publicationId: String, postRequest: PostRequest): Post = accessToken match {
     case Some(at) =>
       val httpUrl = baseApiUrl.resolve(s"/v1/publications/$publicationId/posts")
